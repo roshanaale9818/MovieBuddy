@@ -1,0 +1,99 @@
+package com.example.moviebuddy;
+
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.View;
+
+public class AddMovie extends AppCompatActivity {
+Button addBtn,cancelBtn,viewAllBtn;
+EditText name,director,releaseDate,casts;
+    DatabaseManager mydManager;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        System.out.println("***** ADD MOVIE IS INIT*****");
+        setContentView(R.layout.activity_add_movie);
+        mydManager = new DatabaseManager(this);
+        setUpEventListnerMethods();
+
+
+    }
+
+
+    public void showErrorAlert(String labelName){
+        AlertDialog.Builder alertDialog = new
+                AlertDialog.Builder(this);
+        alertDialog.setTitle("Validation");
+        alertDialog.setMessage(labelName +" is required.");
+        alertDialog.setCancelable(true);
+        alertDialog.setPositiveButton("OK", null);
+        alertDialog.show();
+
+    }
+
+    private void setUpEventListnerMethods(){
+
+        addBtn = findViewById(R.id.saveBtn);
+        viewAllBtn = findViewById(R.id.viewAllBtn);
+        addBtn.setOnClickListener(v->{
+//            insertRows();
+            showAlert(v);
+        });
+        viewAllBtn.setOnClickListener(v->{
+            getRows();
+        });
+
+
+    }
+    public void getRows(){
+//        String movies = mydManager.getMovies();
+//        System.out.println(movies);
+    }
+
+    Button btn;
+    public boolean insertRows() {
+        mydManager = new DatabaseManager(this);
+        Movie movie = new Movie("Openheimer","Christian Bale","Cilian Murphy","2016/08/30");
+        mydManager.addRow(movie);
+        Toast.makeText(getApplicationContext(),"Movie saved Successfull.",Toast.LENGTH_SHORT).show();
+//        mydManager.close();
+        return true;
+    }
+
+    public void showAlert(View v){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+        // set title
+        alertDialogBuilder.setTitle("Confirm");
+        // set dialog message
+        alertDialogBuilder
+                .setMessage("Are you sure you want to save movie ?")
+                .setCancelable(false)
+                .setPositiveButton("YES",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // if this button is clicked, close
+                        // current activity
+//                        MainActivity.this.finish();
+                        insertRows();
+                    }
+                })
+                .setNegativeButton("CANCEL",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // if this button is clicked, just close
+                        // the dialog box and do nothing
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        // show it
+        alertDialog.show();
+    }
+}

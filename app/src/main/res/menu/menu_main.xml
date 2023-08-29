@@ -1,0 +1,30 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.moviebuddy.MainActivity">
+<!--    <item-->
+<!--        android:id="@+id/action_settings"-->
+<!--        android:orderInCategory="100"-->
+<!--        android:title="@string/action_settings"-->
+<!--        app:showAsAction="never" />-->
+    <item
+        android:id="@+id/action_addMovie"
+        android:orderInCategory="100"
+        android:title="Add Movie"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_listMovies"
+        android:orderInCategory="100"
+        android:title="List Movies"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_addCine"
+        android:orderInCategory="100"
+        android:title="Add Cinema"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_listCinema"
+        android:orderInCategory="100"
+        android:title="List Cinema"
+        app:showAsAction="never" />
+</menu>
