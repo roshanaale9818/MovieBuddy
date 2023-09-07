@@ -9,7 +9,7 @@ public class SQLHelper extends SQLiteOpenHelper {
 
     public SQLHelper(Context c) {
         super(c, DatabaseManager.DB_NAME, null, DatabaseManager.DB_VERSION);
-        System.out.println("****** CREATING DATABASE******");
+//        System.out.println("****** CREATING DATABASE******");
 //        SQLiteDatabase db=this.getWritableDatabase();
     }
     @Override
@@ -19,6 +19,7 @@ public class SQLHelper extends SQLiteOpenHelper {
         try {
 //            Log.d(LOG_TAG, "A table is created with this SQL-String: " + SQL_CREATE + " angelegt.");
             db.execSQL(DatabaseManager.CREATE_TABLE);
+            db.execSQL(DatabaseManager.CREATE_CINEMA);
         }
         catch (Exception ex) {
            System.out.println(ex.getMessage());
@@ -29,6 +30,7 @@ public class SQLHelper extends SQLiteOpenHelper {
         System.out.println("*****ONUPGRADE IS CALLED ******");
         Log.w("Products table", "Upgrading database i.e. dropping table and recreating it");
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseManager.DB_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + DatabaseManager.DB_CINEMA_TABLE);
         onCreate(db);
     }
 }

@@ -2,26 +2,25 @@ package com.example.moviebuddy;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class ListMovie extends AppCompatActivity {
-ListView list;
-DatabaseManager dbManager;
+public class ListCinemaActivity extends AppCompatActivity {
+
+    ListView list;
+    DatabaseManager dbManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_movie);
+        setContentView(R.layout.activity_list_cinema);
         System.out.println("LINE IS CALLED");
-        dbManager = new DatabaseManager(ListMovie.this);
+        dbManager = new DatabaseManager(ListCinemaActivity.this);
         dbManager.openReadable();
 
 
-       ArrayList<String> values = dbManager.retrieveRows();
-       System.out.println("===== "+ values.toArray(new String[0]));
+        ArrayList<String> values = dbManager.getCinemasList();
+        System.out.println("===== "+ values.toArray(new String[0]));
 
         // use your custom layout
 
@@ -29,8 +28,8 @@ DatabaseManager dbManager;
 //        list= (ListView) findViewById(R.id.moviesListView);
 //        list.setAdapter(adapter);
 
-        CustomMovieAdapter adapter = new CustomMovieAdapter(this, values);
-        list= (ListView) findViewById(R.id.moviesListView);
+        CustomCinemaAdapter adapter = new CustomCinemaAdapter(this, values);
+        list= (ListView) findViewById(R.id.cinemasListView);
         list.setAdapter(adapter);
 
 

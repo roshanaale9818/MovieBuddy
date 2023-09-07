@@ -75,6 +75,16 @@ public class MainActivity extends AppCompatActivity {
                     ,ListMovie.class);
             startActivity(intent);
         }
+        if(id == R.id.action_addCine){
+            Intent intent = new Intent(MainActivity.this
+                    ,AddCinemaActivity.class);
+            startActivity(intent);
+        }
+        if(id == R.id.action_listCinema){
+            Intent intent = new Intent(MainActivity.this
+                    ,ListCinemaActivity.class);
+            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }

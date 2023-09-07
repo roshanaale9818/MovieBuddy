@@ -1,5 +1,6 @@
 package com.example.moviebuddy;
 
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,15 +41,27 @@ EditText name,director,releaseDate,casts;
     }
 
     private void setUpEventListnerMethods(){
-
         addBtn = findViewById(R.id.saveBtn);
         viewAllBtn = findViewById(R.id.viewAllBtn);
+        name = findViewById(R.id.name);
+        director = findViewById(R.id.directorEditText);
+        casts = findViewById(R.id.castEditText);
+        releaseDate = findViewById(R.id.releaseDateEditText);
+        cancelBtn = findViewById(R.id.cancelBtn);
+
+
         addBtn.setOnClickListener(v->{
 //            insertRows();
             showAlert(v);
         });
+        cancelBtn.setOnClickListener(v->{
+//            goback
+            super.onBackPressed();
+        });
         viewAllBtn.setOnClickListener(v->{
-            getRows();
+            Intent intent = new Intent(AddMovie.this
+                    ,ListMovie.class);
+            startActivity(intent);
         });
 
 
@@ -59,13 +72,38 @@ EditText name,director,releaseDate,casts;
     }
 
     Button btn;
-    public boolean insertRows() {
-        mydManager = new DatabaseManager(this);
-        Movie movie = new Movie("Openheimer","Christian Bale","Cilian Murphy","2016/08/30");
-        mydManager.addRow(movie);
-        Toast.makeText(getApplicationContext(),"Movie saved Successfull.",Toast.LENGTH_SHORT).show();
+    public void insertRows() {
+        boolean isValid = this.isValid();
+        if(!isValid){
+            AlertDialog.Builder alertDialog = new
+                    AlertDialog.Builder(this);
+            alertDialog.setTitle("Validation");
+            alertDialog.setMessage("All fields are required.");
+            alertDialog.setCancelable(true);
+            alertDialog.setPositiveButton("OK", null);
+            alertDialog.show();
+            return;
+        }
+        else {
+            mydManager = new DatabaseManager(this);
+//        Movie movie = new Movie("Openheimer","Christian Bale","Cilian Murphy","2016/08/30");
+            Movie movie = new Movie(name.getText().toString(), director.getText().toString(), casts.getText().toString(), releaseDate.getText().toString());
+            mydManager.addRow(movie);
+            Toast.makeText(getApplicationContext(), name.getText().toString() + " saved Successfull.", Toast.LENGTH_SHORT).show();
 //        mydManager.close();
-        return true;
+            ;
+        }
+    }
+
+
+    private boolean isValid(){
+        if(name.getText().toString().isEmpty() || releaseDate.getText().toString().isEmpty() ||
+                casts.getText().toString().isEmpty() || director.getText().toString().isEmpty()){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     public void showAlert(View v){
