@@ -26,30 +26,33 @@ public class CustomCinemaAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.cinemarow, parent, false);
-        TextView nameView = rowView.findViewById(R.id.movieCheckbox);
-//        Button btn = rowView.findViewById(R.id.);
-
-        System.out.println("THIS IS POSITION:"+position);
+        TextView nameView = rowView.findViewById(R.id.cineName);
+        Button btn = rowView.findViewById(R.id.cinBtn);
         String itemText = getItem(position);
+//        System.out.println("RESULT==>"+itemText.toLowerCase()+itemText.toLowerCase()=="no records found");
+//        if(itemText.toLowerCase()=="no records found"){
+//            btn.setVisibility(View.GONE);
+//
+//        }
         nameView.setText(itemText);
 
-//
-//        // Set a click listener for the button
-//        btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Perform actions when the button is clicked
-////                TextView id = rowView.findViewById(values.get(0))
-//                Intent intent = new Intent(context
-//                        ,MovieView.class);
-//                String movieId = getItem(position).split(",",2)[0];
-//
-//                intent.putExtra("movieId",movieId);
-//                System.out.println("PASSING ID IS:"+ getItem(0));
-//                Toast.makeText(getContext(), "Button Clicked for item: " + movieId, Toast.LENGTH_SHORT).show();
-//                context.startActivity(intent);
-//            }
-//        });
+
+        // Set a click listener for the button
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Perform actions when the button is clicked
+//                TextView id = rowView.findViewById(values.get(0))
+                Intent intent = new Intent(context
+                        ,CinemaView.class);
+                String cinemaId = getItem(position).split(",",2)[0];
+
+                intent.putExtra("cinemaId",cinemaId);
+                System.out.println("PASSING ID IS:"+ getItem(0));
+                Toast.makeText(getContext(), "Button Clicked for item: " + cinemaId, Toast.LENGTH_SHORT).show();
+                context.startActivity(intent);
+            }
+        });
 
         return rowView;
     }

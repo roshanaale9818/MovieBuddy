@@ -40,6 +40,8 @@ EditText name,director,releaseDate,casts;
 
     }
 
+    Button home;
+
     private void setUpEventListnerMethods(){
         addBtn = findViewById(R.id.saveBtn);
         viewAllBtn = findViewById(R.id.viewAllBtn);
@@ -48,6 +50,7 @@ EditText name,director,releaseDate,casts;
         casts = findViewById(R.id.castEditText);
         releaseDate = findViewById(R.id.releaseDateEditText);
         cancelBtn = findViewById(R.id.cancelBtn);
+//        home = findViewById(R.id.onHome);
 
 
         addBtn.setOnClickListener(v->{
@@ -58,6 +61,11 @@ EditText name,director,releaseDate,casts;
 //            goback
             super.onBackPressed();
         });
+//        home.setOnClickListener(v->{
+//            Intent intent = new Intent(AddMovie.this
+//                    ,MainActivity.class);
+//            startActivity(intent);
+//        });
         viewAllBtn.setOnClickListener(v->{
             Intent intent = new Intent(AddMovie.this
                     ,ListMovie.class);

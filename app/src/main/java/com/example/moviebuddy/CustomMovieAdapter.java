@@ -27,6 +27,10 @@ public class CustomMovieAdapter extends  ArrayAdapter<String>{
 
         System.out.println("THIS IS POSITION:"+position);
         String itemText = getItem(position);
+        if(itemText.toLowerCase()=="No records found."){
+            btn.setVisibility(View.GONE);
+
+        }
         nameView.setText(itemText);
 
 

@@ -50,8 +50,7 @@ public class AddCinemaActivity extends AppCompatActivity {
             cancelBtn = findViewById(R.id.cancelCinema);
 
         addBtn.setOnClickListener(v->{
-            insertCinema();
-//            showAlert(v);
+            showAlert(v);
         });
         cancelBtn.setOnClickListener(v->{
 //            goback
@@ -75,7 +74,8 @@ public class AddCinemaActivity extends AppCompatActivity {
         else {
             mydManager = new DatabaseManager(this);
             String[] array = {"1","23"};
-            Cinema cinema = new Cinema(name.getText().toString(),location.getText().toString(),array);
+            Cinema cinema = new Cinema(name.getText().toString(),location.getText().toString(),new ArrayList<String>());
+            System.out.println("ADDING IN CINEMA"+cinema.toString());
             mydManager.addCinema(cinema);
             Toast.makeText(getApplicationContext(), name.getText().toString() + " saved successfull.", Toast.LENGTH_SHORT).show();
         }
